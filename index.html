@@ -1,33 +1,510 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luminara 光魂晶宇</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>光魂晶宇 LUMINARA</title>
+
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      background: #000;
-      color: #fff;
-      font-family: "Helvetica Neue", sans-serif;
-      text-align: center;
-      padding: 80px 20px;
+      padding: 0;
     }
-    h1 {
-      font-size: 32px;
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+        "PingFang TC", "Noto Sans CJK TC", sans-serif;
+      background: radial-gradient(circle at top, #151521 0%, #050509 55%, #020204 100%);
+      color: #f7f7f7;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --------- Header --------- */
+    header {
+      padding: 18px 20px;
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-main {
+      letter-spacing: 0.3em;
+      font-size: 0.8rem;
+      color: #b3b3c9;
+    }
+
+    .brand-en {
+      font-size: 1.2rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      font-size: 0.85rem;
+      color: #d6d6e0;
+    }
+
+    nav a {
+      opacity: 0.7;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    /* --------- Hero --------- */
+    .hero {
+      max-width: 1080px;
+      margin: 40px auto 60px;
+      padding: 0 20px 20px;
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 32px;
+    }
+
+    .hero-text-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #b3b3c9;
+      margin-bottom: 16px;
+    }
+
+    .hero-title-zh {
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      margin-bottom: 6px;
+    }
+
+    .hero-title-en {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #f5f5ff;
+      margin-bottom: 18px;
+    }
+
+    .hero-tagline-zh, .hero-tagline-en {
+      font-size: 0.95rem;
+      color: #d3d3e0;
+    }
+
+    .hero-tagline-en {
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .hero-note {
+      margin-top: 24px;
+      font-size: 0.85rem;
+      color: #9f9fb6;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(4, 4, 8, 0.7);
+      font-size: 0.78rem;
+      margin-top: 18px;
+      color: #cfcfe6;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #3dd68c;
+      box-shadow: 0 0 10px rgba(61, 214, 140, 0.7);
+    }
+
+    .hero-visual {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: radial-gradient(circle at top, #2b2646 0%, #0d0b17 48%, #050509 100%);
+      padding: 20px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .hero-visual-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #babada;
       margin-bottom: 10px;
-      letter-spacing: 2px;
     }
-    p {
-      font-size: 18px;
+
+    .crystal-orbit {
+      position: relative;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .crystal-orbit::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(
+        from 220deg,
+        rgba(132, 205, 255, 0.1),
+        rgba(221, 191, 255, 0.55),
+        rgba(255, 220, 180, 0.7),
+        rgba(132, 205, 255, 0.1)
+      );
+      filter: blur(14px);
       opacity: 0.85;
-      line-height: 1.6;
+    }
+
+    .crystal-core {
+      position: relative;
+      z-index: 1;
+      width: 94px;
+      height: 94px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      background: radial-gradient(circle at 20% 0%, #fff5e4 0%, #ffe0b2 30%, #a87fe9 72%, #1a1630 100%);
+      box-shadow:
+        0 0 25px rgba(215, 187, 255, 0.9),
+        0 0 60px rgba(255, 222, 191, 0.6);
+    }
+
+    .crystal-label {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #151521;
+      font-weight: 600;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      font-size: 0.75rem;
+      color: #bebed3;
+    }
+
+    .hero-meta-item {
+      padding: 10px 10px;
+      border-radius: 10px;
+      background: rgba(10, 10, 20, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-meta-label {
+      font-size: 0.7rem;
+      color: #8e8eaa;
+      margin-bottom: 4px;
+    }
+
+    .hero-meta-value {
+      font-size: 0.8rem;
+    }
+
+    /* --------- Sections --------- */
+    section {
+      max-width: 1080px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 0.95rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #b3b3c9;
+      margin-bottom: 10px;
+    }
+
+    .section-heading {
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .section-text {
+      font-size: 0.9rem;
+      color: #d7d7e4;
+      max-width: 680px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .card {
+      padding: 14px 14px 16px;
+      border-radius: 14px;
+      background: rgba(9, 9, 18, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.84rem;
+      color: #dad9ec;
+    }
+
+    .card-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #b8b8cf;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+
+    .card-body {
+      font-size: 0.84rem;
+      color: #c9c9de;
+    }
+
+    /* --------- Footer --------- */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 16px 20px 22px;
+      font-size: 0.75rem;
+      color: #8d8da5;
+      max-width: 1080px;
+      margin: 10px auto 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    footer .left {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    footer .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #3dd68c;
+      box-shadow: 0 0 8px rgba(61, 214, 140, 0.7);
+    }
+
+    /* --------- Responsive --------- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      nav {
+        gap: 12px;
+        font-size: 0.8rem;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        margin-top: 18px;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
+
 <body>
-  <h1>光魂晶宇 LUMINARA</h1>
-  <p>來自世界屋脊的光，為靈魂而生。</p>
-  <p>目前官網建置中… 敬請期待。</p>
+  <div class="page">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-main">光魂晶宇</div>
+        <div class="brand-en">LUMINARA</div>
+      </div>
+
+      <nav>
+        <a href="#story">品牌理念</a>
+        <a href="#collection">水晶系列</a>
+        <a href="#contact">聯絡</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <main class="hero">
+      <div>
+        <div class="hero-text-eyebrow">FROM THE ROOF OF THE WORLD</div>
+
+        <h1 class="hero-title-zh">來自世界屋脊的光，為靈魂而生。</h1>
+        <div class="hero-title-en">LIGHT FOR THE SOUL</div>
+
+        <p class="hero-tagline-zh">
+          喜馬拉雅山與西藏高原的水晶與隕石，承載著高頻而古老的記憶。  
+          在這裡，每一顆水晶都是獨一無二的靈魂藝術品。
+        </p>
+        <p class="hero-tagline-en">
+          Return to Light, Return to Earth.
+        </p>
+
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>官方網站正在建置中，近期將開放完整商品展示與購買。</span>
+        </div>
+
+        <p class="hero-note">
+          若你已持有光魂晶宇的水晶，請視它們為有呼吸的存在——
+          <br>以尊重與覺知相處，它將回應你最真實的頻率。
+        </p>
+      </div>
+
+      <aside class="hero-visual" aria-hidden="true">
+        <div>
+          <div class="hero-visual-title">HIMALAYAN &amp; TIBETAN CRYSTALS</div>
+          <div class="crystal-orbit">
+            <div class="crystal-core">
+              <div class="crystal-label">LUMINARA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <div class="hero-meta-label">主要礦區</div>
+            <div class="hero-meta-value">喜馬拉雅山、阿里、西藏山南等地</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-label">能量取向</div>
+            <div class="hero-meta-value">七脈輪平衡 · 靈性覺醒 · 回歸身心穩定</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-label">材質範圍</div>
+            <div class="hero-meta-value">高頻水晶 · 藏晶 · 隕石 · 特殊礦標</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-label">現況</div>
+            <div class="hero-meta-value">官網建置中 · 將同步 IG 與官網更新</div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Brand Story -->
+    <section id="story">
+      <div class="section-title">BRAND STORY</div>
+      <h2 class="section-heading">讓靈魂與大地，一同呼吸。</h2>
+      <p class="section-text">
+        光魂晶宇 LUMINARA 致力於呈現高頻水晶與隕石最真實的樣貌。
+        我們尊重礦區的艱辛，也尊重每一顆水晶身上的傷痕——那是它走過高山冰河、
+        深谷岩層後留下的生命記錄。  
+        <br><br>
+        在這裡，你看見的不是「完美無瑕的飾品」，而是一件件會與你對話的自然藝術作品。
+      </p>
+    </section>
+
+    <!-- Collection -->
+    <section id="collection">
+      <div class="section-title">COLLECTION</div>
+      <h2 class="section-heading">主要能量系列（即將上架）</h2>
+
+      <div class="grid">
+        <article class="card">
+          <div class="card-tag">HIMALAYAN CRYSTAL</div>
+          <div class="card-title">喜馬拉雅山高頻水晶</div>
+          <p class="card-body">
+            來自高海拔冰川礦區，晶體透亮、頻率純淨。
+            適合需要重啟生命方向、清理雜訊、回到真實自己的靈魂旅人。
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-tag">TIBETAN CRYSTAL</div>
+          <div class="card-title">西藏藏晶 · 靈性覺醒</div>
+          <p class="card-body">
+            帶有古老而寧靜的震動，用於冥想、修行與內在覺察，
+            幫助你在混亂之中保持中心，聽見心底真正的聲音。
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-tag">METEORITE &amp; SPECIAL</div>
+          <div class="card-title">天鐵隕石 · 利比亞黃金隕石等</div>
+          <p class="card-body">
+            具強烈轉化與保護力量的系列，像是宇宙來的訊號，
+            適合準備大幅度改變人生軌道、啟動新階段的你。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="section-title">CONTACT</div>
+      <h2 class="section-heading">如何關注最新進度？</h2>
+      <p class="section-text">
+        官方網站建置完成後，將於社群平台與官網同步公告。  
+        若你已經是既有收藏者，也可以透過私訊既有管道與我們聯繫，
+        我們會為你保留第一手上架資訊與限定作品。
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="left">
+        <span class="dot"></span>
+        <span>光魂晶宇 LUMINARA · Return to Light, Return to Earth.</span>
+      </div>
+      <div>© <span id="year"></span> LUMINARA. All rights reserved.</div>
+    </footer>
+  </div>
+
+  <script>
+    // 自動顯示當年份
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
